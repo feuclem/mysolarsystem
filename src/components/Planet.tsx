@@ -1,5 +1,7 @@
 import './Planet.css';
 import {useEffect, useState} from "react";
+import {Simulate} from "react-dom/test-utils";
+import pointerLeave = Simulate.pointerLeave;
 
 export default function Planet(props: PlanetProps) {
     const {planet, onClick} = props;
@@ -35,7 +37,7 @@ export default function Planet(props: PlanetProps) {
             style={planetStyles}
             onClick={() => onClick(planet)}
         >
-            <img src={`./icons/${planet.name}.png`} alt={"Planet"}/>
+            <img src={`./icons/${planet.name}.png`} alt={"Planet"} width={planet.radius / 1000} height={planet.radius / 1000}/>
         </div>
     );
 }
@@ -52,6 +54,7 @@ export interface PlanetProps {
         rotation: number;
         distance: number;
         axialTilt: number;
+        radius: number;
     };
     onClick: (planet: { name: string; rotation: number; distance: number }) => void;
 }

@@ -4,29 +4,25 @@ import {useEffect, useState} from "react";
 export default function Planet(props: PlanetProps) {
     const {planet, onClick} = props;
 
-    const [angle, setAngle] = useState(0);
+    const [rotationAngle, setRotationAngle] = useState(0);
 
     useEffect(() => {
-        const rotationTime = planet.rotation * 1000;
-
         const updateRotation = () => {
-            const now = Date.now();
-            const rotationAngle = (360 * ((now % rotationTime) / rotationTime)) % 360;
-            const tiltAngle = (360 * ((now % (rotationTime * (360 / planet.axialTilt))) / (rotationTime * (360 / planet.axialTilt)))) % 360;
-            const newAngle = (rotationAngle + tiltAngle) % 360;
-            setAngle(newAngle);
+            const newRotationAngle = calculateRotationAngle(Date.now(), planet.rotation)
+            setRotationAngle(newRotationAngle);
             requestAnimationFrame(updateRotation);
         };
 
         requestAnimationFrame(updateRotation);
-    }, [planet.axialTilt, planet.rotation]);
+    }, [planet.rotation]);
 
-    const planetPosition = calculatePosition(planet.distance, angle);
+    const planetPosition = calculatePosition(planet.distance, rotationAngle);
+
     const planetStyles = {
         left: `${planetPosition.x}px`,
         top: `${planetPosition.y}px`,
         animationDuration: `${planet.rotation}s`,
-        transform: `rotate(${angle}deg)`
+        transform: `rotate(${rotationAngle}deg)`
     };
 
     return (
@@ -34,8 +30,9 @@ export default function Planet(props: PlanetProps) {
             className={`planet ${planet.name}`}
             style={planetStyles}
             onClick={() => onClick(planet)}
+            data-testid="planet"
         >
-            <img src={`./icons/${planet.name}.png`} alt={"Planet"} width={planet.radius / 1000} height={planet.radius / 1000}/>
+            <img src={`./icons/${planet.name}.png`} alt={`Planet: ${planet.name}`} width={planet.radius / 1000} height={planet.radius / 1000}/>
         </div>
     );
 }
@@ -46,12 +43,17 @@ function calculatePosition(distance: number, angle: number) {
     return { x, y };
 }
 
+function calculateRotationAngle(now: number, rotation: number) {
+    const rotationTime = rotation * 1000;
+    const timeSinceLastRotation = now % rotationTime;
+    return (360 * timeSinceLastRotation) / rotationTime;
+}
+
 export interface PlanetProps {
     planet: {
         name: string;
         rotation: number;
         distance: number;
-        axialTilt: number;
         radius: number;
     };
     onClick: (planet: { name: string; rotation: number; distance: number }) => void;

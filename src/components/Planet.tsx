@@ -1,7 +1,5 @@
 import './Planet.css';
 import {useEffect, useState} from "react";
-import {Simulate} from "react-dom/test-utils";
-import pointerLeave = Simulate.pointerLeave;
 
 export default function Planet(props: PlanetProps) {
     const {planet, onClick} = props;

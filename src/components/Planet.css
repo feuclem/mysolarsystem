@@ -1,0 +1,9 @@
+.planet {
+    position: absolute;
+    cursor: pointer;
+}
+
+.planet img {
+    width: 20px;
+    height: 20px;
+}

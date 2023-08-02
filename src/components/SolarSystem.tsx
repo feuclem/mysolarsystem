@@ -10,42 +10,50 @@ export default function SolarSystem() {
         {
             name: "Mercury",
             rotation: 88,
-            distance: 58
+            distance: 58,
+            axialTilt: 1,
         },
         {
             name: "Venus",
             rotation: 243,
-            distance: 108
+            distance: 108,
+            axialTilt: 3,
         },
         {
             name: "Earth",
             rotation: 365,
-            distance: 150
+            distance: 150,
+            axialTilt: 23,
         },
         {
             name: "Mars",
             rotation: 687,
-            distance: 228
+            distance: 228,
+            axialTilt: 25,
         },
         {
             name: "Jupiter",
             rotation: 4329,
-            distance: 778
+            distance: 778,
+            axialTilt: 3,
         },
         {
             name: "Saturn",
             rotation: 10751,
-            distance: 1433
+            distance: 1433,
+            axialTilt: 27,
         },
         {
             name: "Uranus",
             rotation: 30664,
-            distance: 2872
+            distance: 2872,
+            axialTilt: 98,
         },
         {
             name: "Neptune",
             rotation: 60148,
-            distance: 4495
+            distance: 4495,
+            axialTilt: 30,
         }
     ];
 

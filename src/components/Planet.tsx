@@ -11,14 +11,15 @@ export default function Planet(props: PlanetProps) {
 
         const updateRotation = () => {
             const now = Date.now();
-            const elapsed = now % rotationTime;
-            const newAngle = (360 * elapsed) / rotationTime;
+            const rotationAngle = (360 * ((now % rotationTime) / rotationTime)) % 360;
+            const tiltAngle = (360 * ((now % (rotationTime * (360 / planet.axialTilt))) / (rotationTime * (360 / planet.axialTilt)))) % 360;
+            const newAngle = (rotationAngle + tiltAngle) % 360;
             setAngle(newAngle);
             requestAnimationFrame(updateRotation);
         };
 
         requestAnimationFrame(updateRotation);
-    }, [planet.rotation]);
+    }, [planet.axialTilt, planet.rotation]);
 
     const planetPosition = calculatePosition(planet.distance, angle);
     const planetStyles = {
@@ -50,6 +51,7 @@ export interface PlanetProps {
         name: string;
         rotation: number;
         distance: number;
+        axialTilt: number;
     };
     onClick: (planet: { name: string; rotation: number; distance: number }) => void;
 }

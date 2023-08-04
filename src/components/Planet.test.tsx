@@ -11,8 +11,9 @@ test('render component', () => {
             radius: 6371,
         },
         onClick: () => {},
+        accelerationFactor: 1,
     }
-    render(<Planet planet={props.planet} onClick={props.onClick} />);
+    render(<Planet planet={props.planet} onClick={props.onClick} accelerationFactor={props.accelerationFactor}/>);
 
     const planetEarth = screen.getByAltText("Planet: Earth");
 
@@ -28,14 +29,15 @@ test("calculatePosition, calcul les coordonnées de la planète en pixel en fonc
             radius: 6371,
         },
         onClick: () => {},
+        accelerationFactor: 1,
     }
-    render(<Planet planet={props.planet} onClick={props.onClick} />);
+    render(<Planet planet={props.planet} onClick={props.onClick} accelerationFactor={props.accelerationFactor}/>);
 
-    const planetEarth = screen.getByTestId('planet'); // Remplacez 'planet' par l'ID ou un attribut de test de votre élément de planète
+    const planetEarth = screen.getByTestId('planet');
 
     const styleJustBeforeComponentLaunch = planetEarth.style.cssText;
 
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Cela simule une progression de 1000 ms dans le temps
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const styleOneSecondAfterComponentLaunch = planetEarth.style.cssText;
 
@@ -52,8 +54,9 @@ test("calculateRotationAngle, permet de calculer en fonction d'une valeur qui ch
             radius: 6371,
         },
         onClick: () => {},
+        accelerationFactor: 1,
     }
-    render(<Planet planet={props.planet} onClick={props.onClick} />);
+    render(<Planet planet={props.planet} onClick={props.onClick} accelerationFactor={props.accelerationFactor} />);
 
     const planetEarth = screen.getByTestId("planet");
 

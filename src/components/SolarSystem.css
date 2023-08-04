@@ -4,7 +4,11 @@
 
 .sun {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-59%, -32%);
+}
+
+.buttons-field {
+    position: relative;
+    bottom: 49%;
+    right: 37%;
 }
